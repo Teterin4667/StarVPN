@@ -1,2 +1,0 @@
-# StarVPN
-Happ Plus CONFIGURATON✨
