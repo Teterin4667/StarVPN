@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>StarVPN | Превосходная конфиденциальность и безопасность</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0c12;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* градиентные акценты */
+        .gradient-text {
+            background: linear-gradient(135deg, #B3F0FF 0%, #6C63FF 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .bg-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-glow::before {
+            content: "";
+            position: absolute;
+            top: 20%;
+            left: -20%;
+            width: 140%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, rgba(10,12,18,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            background: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #6C63FF, #4A3BFF);
+            color: white;
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(108, 99, 255, 0.4);
+            background: linear-gradient(95deg, #7f77ff, #5c4eff);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(108, 99, 255, 0.6);
+            color: #C4CFFF;
+            background: rgba(15, 18, 28, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-outline:hover {
+            border-color: #6C63FF;
+            color: white;
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        /* карточки и таблицы */
+        .card {
+            background: rgba(18, 22, 35, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(108, 99, 255, 0.3);
+            background: rgba(22, 26, 42, 0.8);
+        }
+
+        /* Happ секция с копированием */
+        .vpn-code-box {
+            background: #0c0f18;
+            border-radius: 20px;
+            border-left: 4px solid #6C63FF;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            padding: 16px 20px;
+            word-break: break-all;
+            color: #b9c3e6;
+        }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(108, 99, 255, 0.5);
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* таблица сравнения */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 18px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            color: #b9c3e6;
+        }
+
+        .badge {
+            background: #2a2f45;
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        footer a {
+            color: #8b92b0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #6C63FF;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .btn {
+                padding: 10px 20px;
+            }
+            .comparison-table th, .comparison-table td {
+                padding: 12px 8px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-glow">
+    <div class="toast-notification" id="toastMsg">✓ Конфигурация скопирована</div>
+
+    <!-- Navbar -->
+    <nav style="padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; background: rgba(10,12,18,0.85); backdrop-filter: blur(12px); z-index: 99;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px;">
+                <span class="gradient-text">Star</span><span style="color:white">VPN</span>
+            </div>
+            <div style="display: flex; gap: 16px;">
+                <a href="#reviews" style="color:#eef2ff; text-decoration: none;">Обзоры</a>
+                <a href="#happ" style="color:#eef2ff; text-decoration: none;">Happ Plus</a>
+                <a href="#comparison" style="color:#eef2ff; text-decoration: none;">Сравнение</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section style="padding: 70px 0 50px;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span class="badge" style="background: #2a2f45; margin-bottom: 20px; display: inline-block;">⭐ Абсолютная конфиденциальность 2026</span>
+                <h1 style="font-size: 3.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px;">Защити свои данные с <span class="gradient-text">StarVPN</span></h1>
+                <p style="font-size: 1.2rem; color: #b9c6e6; margin-bottom: 32px;">Молниеносное соединение, строгая политика zero-logs и глобальная сеть серверов. Открой свободу интернета без компромиссов.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="alert('Переход на тарифы StarVPN — защита уже сегодня')"><i class="fas fa-shield-alt"></i> Начать защиту</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('comparison').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-chart-simple"></i> Сравнить VPN</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Почему VPN + Инфографика -->
+    <section style="padding: 50px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.2rem;">Почему современный VPN необходим?</h2>
+                <p style="color: #a3afcf; max-width: 700px; margin: 12px auto 0;">Шифрование трафика, приватность в публичных Wi-Fi, обход геоблокинга и защита от слежки.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px;">
+                <div class="card" style="padding: 28px;">
+                    <i class="fas fa-lock" style="font-size: 2.2rem; color: #6C63FF; margin-bottom: 18px;"></i>
+                    <h3 style="margin-bottom: 12px;">AES-256 шифрование</h3>
+                    <p style="color: #bbc3df;">Военные стандарты безопасности — ваши данные в полной неприкосновенности даже в самых уязвимых сетях.</p>
+                </div>
+                <div class="card" style="padding: 28px;">
+                    <i class="fas fa-globe" style="font-size: 2.2rem; color: #6C63FF; margin-bottom: 18px;"></i>
+                    <h3 style="margin-bottom: 12px;">105+ стран мира</h3>
+                    <p style="color: #bbc3df;">Мгновенное изменение IP, доступ к глобальному контенту, стриминг и социальные сети без границ.</p>
+                </div>
+                <div class="card" style="padding: 28px;">
+                    <i class="fas fa-tachometer-alt" style="font-size: 2.2rem; color: #6C63FF; margin-bottom: 18px;"></i>
+                    <h3 style="margin-bottom: 12px;">Максимальная скорость</h3>
+                    <p style="color: #bbc3df;">Протоколы Lightway и WireGuard — пинг снижен до 11-18% потери скорости в тестах 2026.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок HAPP PLUS — копирование конфигураций -->
+    <section id="happ" style="padding: 60px 0;">
+        <div class="container">
+            <div class="card" style="padding: 40px; background: linear-gradient(125deg, #11141f, #0b0e16);">
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <span class="badge" style="background:#6C63FF20; color:#B3B5FF;"><i class="fas fa-copy"></i> Для Happ Plus</span>
+                        <h2 style="font-size: 1.9rem; margin: 15px 0 10px;">Готовые конфигурации <br> для прокси-утилиты</h2>
+                        <p style="color:#b9c3e2;">Скопируйте рабочие параметры для VLESS / Shadowsocks и вставьте в приложение Happ Plus. Надёжные серверы отобранны экспертами.</p>
+                        <ul style="margin-top: 20px; list-style: none;">
+                            <li><i class="fas fa-check-circle" style="color:#34d399; margin-right: 10px;"></i> VLESS + Reality (ультра-приватность)</li>
+                            <li><i class="fas fa-check-circle" style="color:#34d399; margin-right: 10px;"></i> Hysteria2 для плохих сетей</li>
+                            <li><i class="fas fa-check-circle" style="color:#34d399; margin-right: 10px;"></i> Trojan & Shadowsocks</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 260px;">
+                        <div style="background: #070a11; border-radius: 28px; padding: 8px;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;"><span style="font-weight:600;">🔐 VLESS (EU-optimized)</span><span style="font-size:12px; background:#1e1f2e; padding:2px 8px; border-radius:20px;">рекомендуемый</span></div>
+                                <div class="vpn-code-box" id="vlessConfig">vless://a9f7e3d2c1b4@starvpn-pro.sg.example:443?encryption=none&security=reality&sni=zoom.us&fp=chrome&pbk=BHW9k3... #StarVPN_REALITY</div>
+                                <button class="btn btn-outline" style="margin-top: 12px; width: 100%;" onclick="copyToClipboard('vlessConfig')"><i class="far fa-copy"></i> Скопировать VLESS</button>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;"><span style="font-weight:600;">🌙 Shadowsocks + Hysteria2</span><span style="font-size:12px;">быстрый старт</span></div>
+                                <div class="vpn-code-box" id="ssConfig">ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpzdGFyMjAyNg==@sg.happ-star.me:8388#Happ_Plus_StarVPN</div>
+                                <button class="btn btn-outline" style="margin-top: 12px; width: 100%;" onclick="copyToClipboard('ssConfig')"><i class="far fa-copy"></i> Скопировать Shadowsocks</button>
+                            </div>
+                            <p class="badge" style="margin-top: 20px; display: flex; align-items: center; gap: 6px; background:#00000030;"><i class="fas fa-info-circle"></i> Happ Plus не продаёт VPN — вы используете свои серверы, конфигурации проверены сообществом.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Рейтинг лучших VPN 2026 (огромная информация) -->
+    <section id="reviews" style="padding: 60px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 48px;">
+                <h2 class="gradient-text" style="font-size: 2.2rem;">Топ VPN по версии экспертов 2026</h2>
+                <p>Данные основаны на рейтингах CNET, Top10VPN и анализе приватности (март-май 2026)</p>
+            </div>
+            <div style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <!-- Карточка ExpressVPN -->
+                <div class="card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between;"><span style="font-weight:800; font-size:1.4rem;">ExpressVPN</span><span class="badge badge-success">#1 Overall</span></div>
+                    <div style="margin: 14px 0;"><i class="fas fa-star" style="color:gold;"></i> <i class="fas fa-star" style="color:gold;"></i> <i class="fas fa-star" style="color:gold;"></i> <i class="fas fa-star" style="color:gold;"></i> <i class="fas fa-star-half-alt" style="color:gold;"></i> 9.8/10</div>
+                    <p>TrustedServer, политика no-logs, 105 стран, собственный протокол Lightway. Лучший для стриминга и приватности [citation:2][citation:6].</p>
+                    <div style="margin-top: 12px;"><span class="badge">от $6.67/мес</span> <span class="badge">+ до 14 устройств</span></div>
+                </div>
+                <!-- NordVPN -->
+                <div class="card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between;"><span style="font-weight:800; font-size:1.4rem;">NordVPN</span><span class="badge badge-success">Самый быстрый</span></div>
+                    <div style="margin: 14px 0;"><i class="fas fa-tachometer-alt"></i> Потеря скорости всего 3% (рекорд 2026) [citation:7]</div>
+                    <p>NordLynx, двойное VPN, защита от DDoS, 7 400+ серверов в 118 странах. Отличный для гейминга.</p>
+                    <div style="margin-top: 12px;"><span class="badge">от $3.39/мес</span> <span class="badge">10 устройств</span></div>
+                </div>
+                <!-- Surfshark -->
+                <div class="card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between;"><span style="font-weight:800; font-size:1.4rem;">Surfshark</span><span class="badge">Best Value</span></div>
+                    <p>Безлимит подключений, CleanWeb (блокировка рекламы), RAM-only серверы. Очень гибкие цены [citation:5].</p>
+                    <div><span class="badge">от $2.29/мес</span> <span class="badge">Unlimited devices</span></div>
+                </div>
+                <!-- Proton VPN -->
+                <div class="card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between;"><span style="font-weight:800; font-size:1.4rem;">Proton VPN</span><span class="badge">Бесплатный без рекламы</span></div>
+                    <p>Open-source, сильная приватность, Швейцария юрисдикция, щедрый бесплатный тариф [citation:8][citation:2].</p>
+                    <span class="badge">от $4.99/мес</span>
+                </div>
+            </div>
+            <div style="margin-top: 36px; background: #11141f; border-radius: 28px; padding: 24px;">
+                <div style="display: flex; gap: 12px; align-items: center;"><i class="fas fa-chart-line" style="font-size: 1.8rem;"></i><h3>Сводная таблица лучших VPN-провайдеров 2026</h3></div>
+                <div style="overflow-x: auto;" id="comparison">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr><th>Провайдер</th><th>Серверов / стран</th><th>Потеря скорости</th><th>Логи</th><th>Одноврем. подключений</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>ExpressVPN</td><td>3000+ / 105</td><td>~18-25%</td><td>Zero-logs (аудит)</td><td>8</td></tr>
+                            <tr><td>NordVPN</td><td>7400+ / 118</td><td>≈3-11%</td><td>No-logs (аудит)</td><td>10</td></tr>
+                            <tr><td>Surfshark</td><td>4500+ / 100</td><td>≈17-21%</td><td>Без логов</td><td>∞</td></tr>
+                            <tr><td>Proton VPN</td><td>18000+ / 129</td><td>~16-21%</td><td>No-logs (Швейцария)</td><td>10</td></tr>
+                            <tr><td>PIA (Private Internet Access)</td><td>35000+ / 91</td><td>~49%</td><td>Прозрачность</td><td>∞</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="badge" style="margin-top: 16px;">🔍 Данные собраны из авторитетных обзоров CNET, экспертных рейтингов и тестов скорости 2026 года [citation:2][citation:5][citation:7]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как выбрать VPN и доп. гайд -->
+    <section style="padding: 40px 0 70px;">
+        <div class="container">
+            <div class="card" style="padding: 40px;">
+                <h3 style="font-size: 1.8rem;">📘 Руководство: Как выбрать идеальный VPN в 2026?</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 28px;">
+                    <div style="flex: 1;">
+                        <i class="fas fa-shield-alt" style="color:#6C63FF"></i>
+                        <h4 style="margin: 12px 0 6px;">1. Приватность и политика логирования</h4>
+                        <p>Проверяйте наличие независимых аудитов и политику "no-logs". ExpressVPN, NordVPN и Proton имеют подтверждённые аудиты.</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <i class="fas fa-rocket"></i>
+                        <h4 style="margin: 12px 0 6px;">2. Скорость и протоколы</h4>
+                        <p>WireGuard, Lightway и NordLynx обеспечивают минимальную потерю скорости — критично для игр и 4K видео.</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <i class="fas fa-server"></i>
+                        <h4 style="margin: 12px 0 6px;">3. География и стриминг</h4>
+                        <p>Чем больше стран и серверов, тем выше шанс обойти геоблокировки Netflix, Hulu, BBC iPlayer.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; background: #0B0E17; border-radius: 24px; padding: 20px;">
+                    <i class="fas fa-microphone-alt"></i> <strong>Совет редакции StarVPN:</strong> Для Happ Plus используйте VLESS-конфигурации c протоколом Reality — наилучшая защита от обнаружения.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 0 20px; margin-top: 20px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                <div><span class="gradient-text" style="font-weight: 800; font-size: 1.5rem;">StarVPN</span><p style="color:#7f8cb0; margin-top: 8px;">Ваша цифровая свобода начинается здесь.</p></div>
+                <div><i class="fas fa-envelope"></i> support@starvpn.com<br><i class="fab fa-twitter"></i> @StarVPN_secure</div>
+                <div>© 2026 StarVPN — все рекомендации основаны на открытых тестах и экспертном анализе рынка VPN.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const textToCopy = codeElement.innerText.trim();
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const toast = document.getElementById('toastMsg');
+                toast.textContent = `✓ ${elementId === 'vlessConfig' ? 'VLESS' : 'Shadowsocks'} конфигурация скопирована!`;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                alert("Не удалось скопировать, но вы можете выделить конфиг вручную.");
+            });
+        }
+    </script>
+</body>
+</html>
